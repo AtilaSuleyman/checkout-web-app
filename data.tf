@@ -3,7 +3,7 @@ data "aws_iam_policy_document" "terraform-state-bucket-policy" {
     effect = "Allow"
 
     actions = [
-      "s3:s3:ListBucket",
+      "s3:ListBucket",
     ]
 
     resources = [
