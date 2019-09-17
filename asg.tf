@@ -6,6 +6,7 @@ resource "aws_launch_template" "web_app_launch_template" {
   tags = {
     Name = "basic-web-app"
   }
+  user_data = "${file("init.sh")}"
 }
 
 resource "aws_autoscaling_group" "web_app_asg" {
