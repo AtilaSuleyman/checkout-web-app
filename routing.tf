@@ -15,7 +15,7 @@ resource "aws_route_table" "basic-web-dmz-route-table" {
   }
 
   tags = {
-    Name = "basic-web-app-route-table"
+    Name = "basic-web-dmz-route-table"
   }
 }
 

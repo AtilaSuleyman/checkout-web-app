@@ -3,7 +3,7 @@ resource "aws_subnet" "dmz_subnet_a" {
   vpc_id = "${aws_vpc.vpc_for_web_app.id}"
   availability_zone = "eu-west-2a"
   tags {
-    Name = "dmz_subnet_b"
+    Name = "dmz_subnet_a"
   }
 }
 
