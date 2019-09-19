@@ -7,14 +7,26 @@ resource "aws_launch_template" "web_app_launch_template" {
   user_data = "${base64encode(file("init.sh"))}"
 }
 
+resource "aws_autoscaling_policy" "scale-up-based-on-cpu-utilization" {
+  name                   = "web-app-scaling-policy"
+  autoscaling_group_name = "${aws_autoscaling_group.web_app_asg.name}"
+  policy_type = "TargetTrackingScaling"
+  target_tracking_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ASGAverageCPUUtilization"
+    }
+
+    target_value = 40.0
+  }
+}
+
 resource "aws_autoscaling_group" "web_app_asg" {
-  name                      = "example_asg"
-  max_size                  = 2
-  min_size                  = 1
-  desired_capacity          = 1
+  name                      = "web-app-asg"
+  max_size                  = 3
+  min_size                  = 2
   health_check_grace_period = 300
   health_check_type         = "ELB"
-  vpc_zone_identifier       = ["${aws_subnet.app_subnet_a.id}"]
+  vpc_zone_identifier       = ["${aws_subnet.app_subnet_a.id}","${aws_subnet.app_subnet_b.id}"]
   load_balancers            = ["${aws_elb.basic-web-app-elb.id}"]
 
   launch_template {
