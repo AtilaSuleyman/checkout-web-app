@@ -17,4 +17,8 @@ high-availability of the service. This ensures that if a whole availability zone
 
 The autoscaling group uses a policy that helps it scale up instances horizontally and dynamically based on how much CPU is 
 being utilized. This ensures that if instances are doing a lot of work, for example we have a spike in consumers using 
-services; more will be made to help distributed the load.    
+services; more will be made to help distributed the load.
+
+## Network Diagram
+
+![diagram](web-app-network-diagram.png)  
